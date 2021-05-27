@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class DocumentsConfig(AppConfig):
+class RegisterExtraHourConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'documents'
+    name = 'apps.register_extra_hour'

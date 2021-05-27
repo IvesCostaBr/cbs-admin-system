@@ -40,11 +40,12 @@ INSTALLED_APPS = [
 
 
     #myapps
-    'company',
-    'collaborator',
-    'departament',
-    'documents',
-    'register_extra_hour',
+    'apps.company',
+    'apps.collaborator',
+    'apps.departament',
+    'apps.documents',
+    'apps.register_extra_hour',
+ 
 
 ]
 
