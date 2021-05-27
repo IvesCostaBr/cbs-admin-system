@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title%} Cadastro Empresas| CB-SYSTEM {% endblock %}
+
+{% block main %}
+<form method="post" enctype="multipart/form-data">
+    {{ form.as_p }}
+    <button type="submit">Apagar</button>
+</form>
+{% endblock %}
