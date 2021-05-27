@@ -41,6 +41,11 @@ INSTALLED_APPS = [
 
     #myapps
     'company',
+    'collaborator',
+    'departament',
+    'documents',
+    'register_extra_hour',
+
 ]
 
 MIDDLEWARE = [
