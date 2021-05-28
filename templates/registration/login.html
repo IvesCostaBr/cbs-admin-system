@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-
 {% block title %} Login {% endblock %}
 
 
 {% block main %}
 <div class="row">
     <div class="col-lg">
+        {{ messages }}
         <form method="post" class="form-horizontal" enctype="multipart/form-data">
             {%  csrf_token %}
             {{ form.as_p }}

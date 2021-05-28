@@ -1,0 +1,17 @@
+{% extends "base.html"%}
+{% load static %}
+{% block links %}
+<link rel="stylesheet" href="{%  static 'css/materialize.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    {{ collaborator }} <br>
+    {{ collaborator.user }} <br>
+    <td><a  href="{% url 'edit_collaborator' collaborator.id  %}" class="waves-effect waves-light btn"><i class="material-icons left">cached</i></a></td>
+</div>
+{% endblock %}
+
+{% block scripts %} 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+{% endblock %}

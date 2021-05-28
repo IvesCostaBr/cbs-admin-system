@@ -1,9 +1,10 @@
 from django.urls import path, include
 from .views import (
-    HomePage
+    HomePage,
 )
 
 urlpatterns = [
     path('', HomePage.as_view(), name='home_page'),
-    path('company/',include('apps.company.urls'))
+    path('company/',include('apps.company.urls')),
+
 ]

@@ -1,33 +1,37 @@
 {% extends "base.html" %}
-
 {% load static %}
-
-
-
-{% block links %}
-<link rel="stylesheet" href="{% static 'css/home.css' %}">
-{% endblock %}
 
 {% block title %} Home {% endblock %}
 
-{% block main %}
+{% block header %}
+{% include 'navbar.html'%}
+{% endblock %}
 
-<div class="row">
-    <div class="col-lg">
-        <h4>Empresas </h4> 
+{% block main %}
+<div class="container-fluid pb-3">
+  <div class="row">
+    <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
+      <div class="bg-light border rounded-3">
+        <h4>Configurações</h4> 
         {% if user.collaborator.company %}
-            <a class="btn btn-primary"href="{% url 'list_company' %}">Editar Empresas</a>
+            <a class="btn btn-primary"href="{% url 'list_company' %}">Empresa</a>
+            <br><br>
+            {% if not user.is_staff %}
+                <a class="btn btn-primary"href="{% url 'collaobrator_page' user.collaborator.id %}">Funcionario</a>
+                <br><br>
+            {% else %}
+                <a class="btn btn-primary"href="{% url 'home_collaborator' %}">Funcionario</a>
+                <br><br>
+            {% endif %}
+
+            <a class="btn btn-primary"href="{% url 'list_company' %}">Documentos</a>
+            <br><br>
+            <a class="btn btn-primary"href="{% url 'list_company' %}">Horas</a>
         {% else %} 
-            
-            <a class="btn btn-primary"href="{% url 'logout' %}">Adicionar Empresa</a>
+            <a class="btn btn-primary"href="{% url 'create_company' %}">Adicionar Empresa</a>
         {% endif %}
-    </div>
-    <div class="col-lg">
-        Meio
-        
-    </div>
-    <div class="col-lg">
-        
+      </div>
+      <div class="bg-light border rounded-3">
         {{ user.collaborator }} 
         {% if user.is_authenticated %}
             <a  class="btn btn-danger"href="{% url 'logout' %}">Logout</a>
@@ -35,8 +39,9 @@
             <a  class="btn btn-success"href="{% url 'login' %}">Login</a>
         {% endif %}
 
-        
-
+      </div>
     </div>
+  </div>
 </div>
+
 {% endblock %}

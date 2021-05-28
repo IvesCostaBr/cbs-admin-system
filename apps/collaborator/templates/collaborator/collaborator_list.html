@@ -1,0 +1,57 @@
+{% extends "base.html"%}
+{% load static %}
+{% block title %} Lista de Colaboradores {% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{%  static 'css/materialize.css' %}">
+{% endblock %}
+
+{% block header %}
+{% include 'navbar.html'%}
+{% endblock %}
+
+{% block main %}
+
+
+<div class="container">
+    <div class="row">
+      <div class="col">
+        Column
+      </div>
+      <div class="col">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Empresa</th>
+                <th>Username</th>
+                <th>Opções</th>
+            </tr>
+            </thead>
+
+            <tbody>
+                {% for c in collaborator_list %}
+                <tr>
+                    <td>{{ c.id }}</td> 
+                    <td>{{ c.first_name }}</td>
+                    <td>{{ c.company.name }}</td>
+                    <td>{{ c.user.username }}</td>
+                    <td><a  href="{% url 'edit_collaborator' c.id  %}" class="waves-effect waves-light btn"><i class="material-icons left">cached</i></a></td>
+                    <td><a  href="{% url 'collaborator_delete' c.id  %}" class="waves-effect pink accent-3 btn"><i class="material-icons left">delete_forever</i></a></td>
+                   
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+      </div>
+      <div class="col">
+        Column
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %} 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+{% endblock %}

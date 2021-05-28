@@ -1,0 +1,10 @@
+{% extends "base.html"%}
+
+{% block main%}
+<h4>Deseja deletar o colaborador {{ collaborator.first_name }}</h4>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Deletar</button>
+</form>
+{% endblock %}
