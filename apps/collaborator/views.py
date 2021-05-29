@@ -4,7 +4,8 @@ from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib.auth.models import User
 #from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .models import Collaborator
-from django.urls import reverse
+from .forms import CollaboratorForm
+from django.urls import reverse_lazy, reverse
 
 
 
@@ -12,16 +13,14 @@ class CollaboratorPage(DetailView):
     model = Collaborator
     template_name = 'collaborator/collaborator_page.html'
 
-  
-
-
 class HomeCollaboratorPainelAdmin(TemplateView):
     template_name =  'collaborator/collaborator_painel_admin.html'
 
 class CreateCollaborator(CreateView):
-    model = Collaborator
-    fields = ('first_name','last_name', 'departaments', 'company')
+    template_name = 'collaborator/collaborator_form.html'
+    form_class = CollaboratorForm
 
+    
     def form_valid(self, form):
         collaborator = form.save(commit=False)#TODO:Não manda para o banco apenas criar o objeto
         collaborator.company = self.request.user.collaborator.company
@@ -37,7 +36,7 @@ class EditDataCollaborator(UpdateView):
     fields = ('first_name','last_name', 'departaments')
 
     def get_absolute_url(self, *args, **kwargs):
-        return reverse('home_page',)
+        return reverse('collaobrator_page',)
 
 class ListCollaborators(ListView):
     model = Collaborator
@@ -47,11 +46,9 @@ class ListCollaborators(ListView):
         return Collaborator.objects.filter(company=company_logged)
 
 
-
-
-
 class CollaboratorDelete(DeleteView):
     model = Collaborator
+    success_url = reverse_lazy('list_collaborators')
 
 class CollaboratorDetail(DetailView):
     model = Collaborator

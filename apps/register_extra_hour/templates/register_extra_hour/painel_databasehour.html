@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Home {% endblock %}
+
+{% block header %}
+{% include 'navbar.html'%}
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid pb-3">
+    <br>
+    <div class="row">
+        <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
+            <div class="bg-light border rounded-3">
+                <a class="waves-effect lime accent-3 btn" href="{% url 'list_hour' %}"><i class="material-icons left">keyboard_tab</i>Lista de Horas</a><br>
+                <br>
+            </div>
+        </div>      
+    </div>
+</div>
+{% endblock %}

@@ -3,21 +3,27 @@
 
 {% block title %} Painel Collaborator{% endblock %}
 
-
+{% block header %}
+    {% include 'navbar.html' %}
+{% endblock %}
 
 {% block main  %}
 
 <div class="container">
     <div class="row">
         <div class="col-lg">
-            <a href="{% url 'new_collaborator'  %}" >Adicionar Colaborador</a><br>
-            <a href="{% url 'list_collaborators' %}" >Lista de Colaboradores</a><br>
-            <a href="{% url 'collaborator_detail'  user.collaborator.id %}">Configurações de Conta</a>
+            <br>
+            <a class="waves-effect waves-light btn-large" href="{% url 'new_collaborator'  %}" >Adicionar Colaborador</a><br>
+            <br>
+            <a class="waves-effect waves-light btn-large" href="{% url 'list_collaborators' %}" >Lista de Colaboradores</a><br>
+            <br>
+            <a class="waves-effect waves-light btn-large" href="{% url 'collaborator_detail'  user.collaborator.id %}">Configurações de Conta</a>
         </div>
         <div class="col-lg">
             Dash
         </div>
     </div>
+
 </div>
 
 

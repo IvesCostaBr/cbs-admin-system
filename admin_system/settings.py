@@ -101,6 +101,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+MEDIA_URL = '/media/'
+
+#TODO:Caso a empresa possuir um servidor de arquivo separado podemos simplesente colocar a url absoluta na viariavel MEDIA__ROOT
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'
     

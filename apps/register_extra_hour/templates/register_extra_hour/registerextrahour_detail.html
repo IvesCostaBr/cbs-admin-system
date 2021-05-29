@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Home {% endblock %}
+
+{% block header %}
+{% include 'navbar.html'%}
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid pb-3">
+    <br>
+    <div class="row">
+       {{ registerextrahour }}
+    </div>
+</div>
+{% endblock %}

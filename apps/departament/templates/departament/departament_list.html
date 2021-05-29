@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}{% endblock %}
+
+
+{% block header %}
+    {% include 'navbar.html' %}
+{% endblock %}
+{% block main %}
+<div class="container">
+    <div class="row">
+        <h5>Departamentos {{ user.collaborator.company }}</h5>
+        {%  for c in departament_list %}
+        <br>
+            {{ c }}
+            <a href="{% url 'delete_departament' c.id %}">Deletar</a>
+            <a href="{% url 'edit_departament' c.id %}">Editar</a>
+            <a href="{% url 'detail_departament' c.id %}">Mais Informações</a>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <a href="{% url 'create_departament' %}">Criar Setor</a>
+
+    </div>
+
+</div>
+
+{% endblock %}

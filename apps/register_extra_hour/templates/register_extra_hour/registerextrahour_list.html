@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Home {% endblock %}
+
+{% block header %}
+{% include 'navbar.html'%}
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Colaborador</th>
+                <th>Motivo</th>
+                <th>Empresa</th>
+                <th>Quantiade de Horas</th>
+                <th>Opções</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for c in registerextrahour_list %}
+                <tr>
+                    <td><a href="{% url 'detail_hour_' c.id %}">#{{ c.id }}</a></td> 
+                    <td> {{c.collaborator.first_name}}</td>
+                    <td> {{c.reason}}</td>
+                    <td>{{ c.collaborator.company.name }}</td>
+                    <td>  {{c.hours}}H</td>
+                    <td><a  href="{% url 'update_hour_extra' c.id  %}" class="waves-effect waves-light btn"><i class="material-icons left">cached</i></a></td>
+                    <td><a  href="{% url 'delete_hour_extra' c.id  %}" class="waves-effect pink accent-3 btn"><i class="material-icons left">delete_forever</i></a></td>
+                </tr>
+                {% empty %}
+                <br>
+                <div class="alert alert-danger" role="alert">
+                  Base de Hora extra está vazia
+                </div>
+                {% endfor %} 
+            </tbody>
+            
+        </table>
+        <br>
+        <a href="{% url 'create_hour_extra' %}" class="waves-effect green darken-1 btn"><i class="material-icons left">schedule</i>Adicionar Hora Extra</a>
+
+      </div>
+      <div class="col">
+        Column
+      </div>
+    </div>
+  </div>
+{% endblock %}

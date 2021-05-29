@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Home {% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block main %}
+
+<br>
+<div class="row">
+        <form method="POST" enctype="multipart/form-data" >
+            {% csrf_token %}
+        
+            {{ form.collaborator}}
+            {{ form.reason}}
+            {{ form.hours }}
+            <button type="submit">Enviar</button>
+        </form>
+</div>
+{% endblock %}

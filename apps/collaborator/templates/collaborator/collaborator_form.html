@@ -1,14 +1,39 @@
 {% extends "base.html"%}
 
 
+{% block header %}
+    {% include 'navbar.html' %}
+{% endblock %}
+
 
 {% block main %} 
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">Enviar</button>
-</form>
-
-
+<br>
+<div class="container">
+    <h3 style="text-align:center" >New Collaborator</h3>
+    <div class="row">
+        <form method="post" enctype="multipart/form-data" class="col s12">
+        {% csrf_token %}
+        <div class="row">
+            <div class="input-field col s6">
+                {{ form.first_name }}
+                <label for="first_name">First Name</label>
+            </div>
+            <div class="input-field col s6">
+                {{ form.last_name }}
+                <label for="first_name">First Name</label>
+                {{ form.departaments }}
+            </div>
+        </div>
+        <!--<div class="row">
+            <div class="input-field col s12">
+            {{ form.departaments }}
+            <label for="departaments">Departaments</label>
+            </div>
+        </div>
+        -->
+        <button class="waves-effect pink blue darken-3 btn" >Cadastrar</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

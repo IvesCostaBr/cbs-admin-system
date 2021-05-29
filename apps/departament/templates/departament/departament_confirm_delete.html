@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}{% endblock %}
+
+
+{% block header %}
+    {% include 'navbar.html' %}
+{% endblock %}
+{% block main %}
+<div class="container">
+    <h4>Deseja deletar o departamento {{ departament }}</h4>
+   <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Deletar</button>
+</form>
+</div>
+
+{% endblock %}

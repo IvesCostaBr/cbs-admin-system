@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Painel Deparaments{% endblock %}
+
+
+{% block header %}
+    {% include 'navbar.html' %}
+{% endblock %}
+{% block main %}
+<div class="container">
+    <h3>Lista de Arquivos</h3>
+    {% if document_list %}
+        {% for c in document_list %}<br>
+        {{ c }}
+        {{ c.owner }}
+        <a href="{{ c.file.url }}">Acessar</a>
+        <a href="{% url 'delete_document' c.id %}">Deletar</a>
+        <a href="{% url 'update_document' c.id %}">Editar</a>
+        {% endfor %}
+    {% else %}
+    <h6>Sem Documentos Cadastrados</h6>
+    {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
