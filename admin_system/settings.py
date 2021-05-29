@@ -8,9 +8,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = config('DEBUG', default=True)
 
-ALLOWED_HOSTS = ['54.237.116.30',]
+ALLOWED_HOSTS = []
 
 
 
@@ -104,7 +104,7 @@ USE_TZ = True
 MEDIA_URL = '/media/'
 
 #TODO:Caso a empresa possuir um servidor de arquivo separado podemos simplesente colocar a url absoluta na viariavel MEDIA__ROOT
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = 'media/'
 
 STATIC_URL = '/static/'
     
