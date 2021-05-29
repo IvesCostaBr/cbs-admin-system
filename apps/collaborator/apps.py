@@ -2,5 +2,4 @@ from django.apps import AppConfig
 
 
 class CollaboratorConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.collaborator'
+    name = 'collaborator'
