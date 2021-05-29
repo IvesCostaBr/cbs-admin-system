@@ -1,7 +1,8 @@
-
 from pathlib import Path
 from decouple import config
 import os
+from django.apps import AppConfig
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -12,7 +13,7 @@ DEBUG = config('DEBUG', default=True)
 
 ALLOWED_HOSTS = ['54.237.116.30', '127.0.0.1']
 
-
+AppConfig.default = False
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -115,3 +116,5 @@ STATICFILES_DIRS = [
 
 LOGIN_REDIRECT_URL = 'home_page'
 LOGOUT_REDIRECT_URL = 'home_page'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
