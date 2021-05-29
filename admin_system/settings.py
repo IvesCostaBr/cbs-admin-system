@@ -13,7 +13,7 @@ DEBUG = config('DEBUG', default=True)
 
 ALLOWED_HOSTS = ['54.237.116.30', '127.0.0.1']
 
-AppConfig.default = False
+AppConfig.default = False #TODO:Setando default como False o django passa a aceitar apps vindo de diretorios diferente 
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -108,6 +108,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media/'
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
     
 STATICFILES_DIRS = [
     BASE_DIR / "static",
