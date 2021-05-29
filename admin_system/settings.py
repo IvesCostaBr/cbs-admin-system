@@ -14,6 +14,7 @@ DEBUG = config('DEBUG', default=True)
 ALLOWED_HOSTS = ['54.237.116.30', '127.0.0.1']
 
 AppConfig.default = False #TODO:Setando default como False o django passa a aceitar apps vindo de diretorios diferente 
+AppConfig.ignore_patterns = [''] 
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -111,11 +112,6 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
     
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-#    '/var/www/static/',
-]
-
 LOGIN_REDIRECT_URL = 'home_page'
 LOGOUT_REDIRECT_URL = 'home_page'
 
