@@ -8,7 +8,6 @@ from .forms import CollaboratorForm
 from django.urls import reverse_lazy, reverse
 
 
-
 class CollaboratorPage(DetailView):
     model = Collaborator
     template_name = 'collaborator/collaborator_page.html'
@@ -20,14 +19,18 @@ class CreateCollaborator(CreateView):
     template_name = 'collaborator/collaborator_form.html'
     form_class = CollaboratorForm
 
-    
+#TODO:realizar um refactore e from_valid
     def form_valid(self, form):
-        collaborator = form.save(commit=False)#TODO:Não manda para o banco apenas criar o objeto
-        collaborator.company = self.request.user.collaborator.company
-        username = collaborator.first_name + collaborator.last_name
-        collaborator.user = User.objects.create(
-            username=username)
-        collaborator.save()
+        collaborator = form.save(commit=False)#TODO:Não manda para o banco apenas criar o objeto  
+        if self.request.user.collaborator:
+            username = collaborator.first_name + collaborator.last_name
+            collaborator.user = User.objects.create(
+                username=username)
+        else:
+            collaborator.user = self.request.user
+
+        collaborator.company = self.request.user.company_set.first()
+        collaborator.save()  
         return super(CreateCollaborator, self).form_valid(form)
 
 
@@ -48,7 +51,7 @@ class ListCollaborators(ListView):
 
 class CollaboratorDelete(DeleteView):
     model = Collaborator
-    success_url = reverse_lazy('list_collaborators')
+    success_url = reverse_lazy('home_page')
 
 class CollaboratorDetail(DetailView):
     model = Collaborator

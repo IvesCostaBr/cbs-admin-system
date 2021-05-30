@@ -3,7 +3,10 @@
 {% block title%} Cadastro Empresas| CB-SYSTEM {% endblock %}
 
 {% block main %}
+<br>
+    <a href="{% url 'home_page' %}"  class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>voltar ao menu</a>
 <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Apagar</button>
 </form>

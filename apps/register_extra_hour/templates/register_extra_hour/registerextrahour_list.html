@@ -8,6 +8,9 @@
 {% endblock %}
 
 {% block main %}
+<br>
+    <a href="{% url 'home_page' %}"  class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>voltar ao menu</a>
+<br>
 <div class="container">
     <div class="row">
       <div class="col">
@@ -21,6 +24,7 @@
                 <th>Motivo</th>
                 <th>Empresa</th>
                 <th>Quantiade de Horas</th>
+                <th>Data</th>
                 <th>Opções</th>
             </tr>
             </thead>
@@ -32,6 +36,7 @@
                     <td> {{c.reason}}</td>
                     <td>{{ c.collaborator.company.name }}</td>
                     <td>  {{c.hours}}H</td>
+                    <td>{{ c.date }} UTC/GMT -05:00 RIO BRANCO</td>
                     <td><a  href="{% url 'update_hour_extra' c.id  %}" class="waves-effect waves-light btn"><i class="material-icons left">cached</i></a></td>
                     <td><a  href="{% url 'delete_hour_extra' c.id  %}" class="waves-effect pink accent-3 btn"><i class="material-icons left">delete_forever</i></a></td>
                 </tr>
