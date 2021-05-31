@@ -11,10 +11,10 @@ class RegisterExtraHour(models.Model):
     date = models.DateTimeField(default=timezone.now)
     collaborator = models.ForeignKey(Collaborator, on_delete=models.PROTECT)
     hours = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    status = models.CharField(max_length=30, default="Em Analise")
 
     def __str__(self):
         return str(self.reason)
-
 
 
 @receiver(signals.post_save, sender=RegisterExtraHour)

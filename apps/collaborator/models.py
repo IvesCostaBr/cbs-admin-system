@@ -21,8 +21,8 @@ class Collaborator(models.Model):
         pass
 
     def somar_horas(self):
-        if  self.registerextrahour_set.all():
-            total = self.registerextrahour_set.all().aggregate(Sum('hours'))['hours__sum']
+        if  self.registerextrahour_set.filter(status='Disponivel'):
+            total = self.registerextrahour_set.filter(status='Disponivel').aggregate(Sum('hours'))['hours__sum']
             Collaborator.objects.all().update(total_horas=total)
         else:
             Collaborator.objects.all().update(total_horas=0.00)
