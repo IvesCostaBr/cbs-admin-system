@@ -37,19 +37,8 @@
         </div>
         <div class="bg-light border rounded-3">
             <div class="col-md">
-              <div class="bg-light border rounded-3">
-                <form method="POST" action="{% url 'test' %}" >
-                  {% csrf_token %}
-                <button type="submit" >Testar</button>
-                </form>
-
-              </div>
-           
+              dashboard
           </div>
-            <form method="POST" action="{% url 'test' %}" >
-              {% csrf_token %}
-            <button type="submit" >Testar</button>
-            </form>
         </div>
     {% else %}
     <br>

@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
+import json
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import (
     TemplateView,
@@ -6,6 +7,7 @@ from django.views.generic import (
     CreateView,
     DetailView,
 )
+from django.views import View
 from django.views.generic.edit import (
     DeleteView,
     UpdateView,
@@ -52,3 +54,9 @@ class DeleteHourExtra(DeleteView):
 
 class DetailHourExtra(DetailView):
     model = RegisterExtraHour
+
+
+class UtilizarHoraExtra(View):
+    def post(self, *args,**kwargs):
+        response = json.dumps({'mensagem':'ola mundo'})
+        return HttpResponse(response, content_type='application/json')
