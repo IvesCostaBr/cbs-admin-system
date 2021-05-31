@@ -12,10 +12,12 @@
         Menu
     </div>
     <div class="col-lg">
-        <h5>Empresa : {{ company.name }}<a href="{% url 'update_company' company.id %}" >Editar</a>
+        <h5>Empresa : {{ company.name }}<br>
+            <h9>Gerente:{{ company.gerente}}</h9><br>
+            <h9>CNPJ:{{ company.cnpj }}</h9><br>
+            <h9>Telefone:{{ company.telefone }}</h9><br>
+            <a href="{% url 'update_company' company.id %}" >Editar</a>
             <a href="{% url 'delete_company' company.id %}" >Deletar</a></h5>
-        <br>
-        {{ user.collaborator.first_name }}
         <br>
     </div>
 </div>

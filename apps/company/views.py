@@ -4,17 +4,20 @@ from django.views.generic.base import View
 from django.views.generic.edit import UpdateView, DeleteView
 #from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .models import Company
+from django.urls import reverse_lazy
 
 
 class CreateCompany(CreateView):
     model = Company
-    fields = ['name',]
-
+    fields = ['name', 'cnpj', 'telefone']
+#TODO:Pensar em possibilidade de refatoração
     def form_valid(self, form):#TODO:Override no metodo from_valid a qual depois de salvar o obj no banco retorna o mesmo no metodo
-        obj = form.save()
-        self.request.user.collaborator.company = obj
-        self.request.user.collaborator.save()
-        return redirect('list_company')
+        obj = form.save(commit=False)
+        if self.request.user.is_staff:
+            obj.gerente = self.request.user
+            obj.save()
+        
+        return redirect('home_page')
 
 
 class ListCompany(View):
@@ -25,11 +28,12 @@ class ListCompany(View):
     
 class UpdateCompany(UpdateView):
     model = Company
-    fields = ('name',)
+    fields = ['name', 'cnpj', 'telefone']
 
 
 class DeleteCompany(DeleteView):
     model = Company
+    success_url =  reverse_lazy('home_page')
     
 
 

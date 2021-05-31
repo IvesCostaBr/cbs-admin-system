@@ -8,21 +8,45 @@
     {% include 'navbar.html' %}
 {% endblock %}
 {% block main  %}
+<br>
+    <a href="{% url 'home_page' %}"  class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>voltar ao menu</a>
+<br>
 <div class="container">
     <div class="row">
+        <h4>Bem Vindo {{ collaborator.user }}</h4> <br>
         <div class="col-lg"><br>
+            <p>Configurações usuario</p>
             {% if user.is_staff %}<br>
             <a  href="{% url 'painel_collaborator'  %}" class="waves-effect waves-light btn"><i class="material-icons left">cached</i>Gestão de Funcionarios</a><br>
             {% endif %}<br>
-            <a  href="{% url 'edit_collaborator' user.collaborator.id %}" class="waves-effect waves-light btn"><i class="material-icons left">cached</i>Editar Dados</a>
-        </div>
-        <div class="col-lg">
-            {{ collaborator }}<br>
-            {{ collaborator.documents }}<br>
-            <a  href="{% url 'create_document' %}" class="waves-effect waves-light btn"><i class="material-icons left">cached</i>Adicionar Documentos</a><br>
+            <a  href="{% url 'edit_collaborator' user.collaborator.id %}" class="waves-effect waves-light btn"><i class="material-icons left">cached</i>Editar Dados</a><br>
             <br>
             <a  href="{% url 'list_documents'  %}" class="waves-effect waves-light btn"><i class="material-icons left">cached</i>Meus Documentos</a>
-           
+        </div>
+        <div class="col-lg"><br>
+            <h5>Registros de Hora Extra</h5> <br>
+            <h7>Total de Horas : {{ user.collaborator.total_horas }} HORAS</h7>
+            <table>
+                <thead>
+                  <tr>
+                      <th>Data</th>
+                      <th>Motivo</th>
+                      <th>Horas</th>
+                  </tr>
+                </thead>
+                <tbody>
+            {% for hour in  user.collaborator.registerextrahour_set.all %}
+                  <tr>
+                    <td>{{ hour.date }}</td>
+                    <td>{{ hour.reason }}</td>
+                    <td>{{ hour.hours }} Horas</td>
+                  </tr> 
+               
+            {% empty %}
+                <p>Sem Horas Extras registradas</p>
+            {% endfor %}
+            </tbody>
+            </table>
         </div>
     </div>
 </div>

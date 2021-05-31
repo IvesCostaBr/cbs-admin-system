@@ -9,12 +9,17 @@
 {% block header %}
 <nav>
   <div class="nav-wrapper purple">
-    <a href="{% url 'home_page' %}" class="brand-logo"><i class="material-icons">cloud</i>CBS Admin-system</a>
-    <ul class="right hide-on-med-and-down">
-      <li><a href="sass.html"><i class="material-icons">search</i></a></li>
-      <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
-      <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
-      <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
+    <a href="{% url 'home_page' %}">CBS Admin-system</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a href="">Minha Conta</a></li>
+      <li><a href="">Notificações <span class="new badge">4</span></a></li>
+      <li>
+        {% if user.is_authenticated %}
+              <a  class="waves-effect pink accent-3 btn" href="{% url 'logout' %}"><i class="material-icons left">keyboard_tab</i>Sair</a>
+        {% else %}
+              <a  class="btn btn-success"href="{% url 'login' %}">Login</a>
+        {% endif %}
+      </li>
     </ul>
   </div>
 </nav>

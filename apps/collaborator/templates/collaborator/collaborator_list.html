@@ -11,8 +11,6 @@
 {% endblock %}
 
 {% block main %}
-
-
 <div class="container">
     <div class="row">
       <div class="col">
@@ -26,6 +24,7 @@
                 <th>Nome</th>
                 <th>Empresa</th>
                 <th>Username</th>
+                <th>T/Horas</th>
                 <th>Opções</th>
             </tr>
             </thead>
@@ -37,6 +36,7 @@
                     <td>{{ c.first_name }}</td>
                     <td>{{ c.company.name }}</td>
                     <td>{{ c.user.username }}</td>
+                    <td>{{ c.total_horas }}Horas</td>
                     <td><a  href="{% url 'edit_collaborator' c.id  %}" class="waves-effect waves-light btn"><i class="material-icons left">cached</i></a></td>
                     <td><a  href="{% url 'collaborator_delete' c.id  %}" class="waves-effect pink accent-3 btn"><i class="material-icons left">delete_forever</i></a></td>
                    

@@ -18,9 +18,14 @@
         <a href="{% url 'update_document' c.id %}">Editar</a>
         {% endfor %}
     {% else %}
+    
     <h6>Sem Documentos Cadastrados</h6>
     {% endif %}
-    </div>
+    <br>
+    <a  href="{% url 'create_document' %}" class="waves-effect waves-light btn"><i class="material-icons left">cached</i>Adicionar Documentos</a><br>
+    <br>
+</div>
+    
 </div>
 
 

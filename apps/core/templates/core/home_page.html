@@ -8,36 +8,62 @@
 {% endblock %}
 
 {% block main %}
+<h3>Olá {{ user.collaborator.first_name }}</h3>
 <div class="container-fluid pb-3">
+  <br>
   <div class="row">
-    <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
-      <div class="bg-light border rounded-3">
-        <h4>Configurações</h4> 
-        {% if user.collaborator.company %}
-            <a class="btn btn-primary"href="{% url 'list_company' %}"><i class="large material-icons">work</i> Empresa</a><br>
-            <br>
-            <a class="btn btn-primary"href="{% url 'home_departament' %}"><i class="large material-icons">web</i> Departamentos</a>
-            <br><br>
-            <a class="btn btn-primary"href="{% url 'collaobrator_page' user.collaborator.id %}"><i class="large material-icons">person</i> Funcionario</a>
-            <br><br>
-            <a class="btn btn-primary"href="{% url 'home_documents' %}"><i class="large material-icons">storage</i> Documentos</a>
-            <br><br>
-            <a class="btn btn-primary"href="{% url 'painel_hour' %}"><i class="large material-icons">access_time</i>  Horas</a>
-        {% else %} 
-            <a class="btn btn-primary"href="{% url 'create_company' %}">Adicionar Empresa</a>
-        {% endif %}
-      </div>
-      <div class="bg-light border rounded-3">
-        {{ user.collaborator }} 
-        {% if user.is_authenticated %}
-            <a  class="waves-effect pink accent-3 btn" href="{% url 'logout' %}"><i class="material-icons left">keyboard_tab</i>Sair</a>
-        {% else %}
-            <a  class="btn btn-success"href="{% url 'login' %}">Login</a>
-        {% endif %}
+    {% if  user.company_set.first or user.collaborator.company %}
+      <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
+        <div class="bg-light border rounded-3">
+          {% if user.company_set.first.name %}
+            <h4> Empresa:{{user.company_set.first.name}}</h4>
+          {% elif user.collaborator.company %}
+            <h4> Empresa:{{ user.collaborator.company.name}}</h4>
+          {% endif %}
+          <h5>Configurações</h5> 
+          {% if user.collaborator.company %}
+              <a class="btn btn-primary"href="{% url 'list_company' %}"><i class="large material-icons">work</i> Empresa</a><br>
+              <br>
+              <a class="btn btn-primary"href="{% url 'home_departament' %}"><i class="large material-icons">web</i> Departamentos</a>
+              <br><br>
+              <a class="btn btn-primary"href="{% url 'collaobrator_page' user.collaborator.id %}"><i class="large material-icons">person</i> Funcionario</a>
+              <br><br>
+              <a class="btn btn-primary"href="{% url 'home_documents' %}"><i class="large material-icons">storage</i> Documentos</a>
+              <br><br>
+              <a class="btn btn-primary"href="{% url 'painel_hour' %}"><i class="large material-icons">access_time</i>  Horas</a>
+          {% else %} 
+              <a class="btn btn-primary"href="{% url 'new_collaborator' %}">Cadastrar-se como funcionario</a>
+          {% endif %}
+        </div>
+        <div class="bg-light border rounded-3">
+            <div class="col-md">
+              <div class="bg-light border rounded-3">
+                <form method="POST" action="{% url 'test' %}" >
+                  {% csrf_token %}
+                <button type="submit" >Testar</button>
+                </form>
 
-      </div>
+              </div>
+           
+          </div>
+            <form method="POST" action="{% url 'test' %}" >
+              {% csrf_token %}
+            <button type="submit" >Testar</button>
+            </form>
+        </div>
+    {% else %}
+    <br>
+    <div class="alert alert-warning" role="alert">
+      <h5>Atenção para ter acesso Total a plataorma por favor click no link a baixo de cadastro os dados</h5>
+      <a class="btn btn-primary"href="{% url 'create_company' %}">Cadastrar Empresa</a><br>
     </div>
+    <br>
+    {% endif %}
   </div>
 </div>
 
+{% endblock %}
+{% block scripts %}
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script src="{% static 'js/ajax-functions.js' %}" ></script>
 {% endblock %}

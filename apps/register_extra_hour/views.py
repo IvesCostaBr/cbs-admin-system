@@ -16,8 +16,6 @@ from .forms import HoraExtraForm
 
 
 
-
-
 class HomeHourDatabase(LoginRequiredMixin, TemplateView):
     template_name = 'register_extra_hour/painel_databasehour.html'
 
@@ -38,10 +36,15 @@ class ListHourExtra(LoginRequiredMixin ,ListView):
         return RegisterExtraHour.objects.filter(collaborator__company=self.request.user.collaborator.company)
 
 
+
 class UpdateHourExtra(UpdateView):
     model = RegisterExtraHour
     fields = ('reason', 'hours')
-    success_url =  reverse_lazy('list_hour')
+    
+    def get_success_url(self):
+        return reverse_lazy('update_hour_extra', args=[self.object.id])
+
+    
 
 class DeleteHourExtra(DeleteView):
     model = RegisterExtraHour
