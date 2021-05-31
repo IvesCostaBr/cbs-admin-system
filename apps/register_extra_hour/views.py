@@ -15,6 +15,7 @@ from django.views.generic.edit import (
 from .models import RegisterExtraHour
 from django.urls import reverse_lazy
 from .forms import HoraExtraForm
+from django.forms.models import model_to_dict
 
 
 
@@ -41,7 +42,7 @@ class ListHourExtra(LoginRequiredMixin ,ListView):
 
 class UpdateHourExtra(UpdateView):
     model = RegisterExtraHour
-    fields = ('reason', 'hours')
+    fields = ('reason', 'hours', 'date', 'status')
     
     def get_success_url(self):
         return reverse_lazy('update_hour_extra', args=[self.object.id])
@@ -58,5 +59,18 @@ class DetailHourExtra(DetailView):
 
 class UtilizarHoraExtra(View):
     def post(self, *args,**kwargs):
-        response = json.dumps({'mensagem':'ola mundo'})
+        hora = RegisterExtraHour.objects.get(id=kwargs['pk'])
+        hora.status = "Ultilizada"
+        hora.save()
+        response = json.dumps({'mensagem':'Atualiado',
+        'horas':float(hora.collaborator.total_horas)})
         return HttpResponse(response, content_type='application/json')
+
+
+def disponibilizar_hora(request,id):
+    hour = RegisterExtraHour.objects.get(id=id)
+    hour.status = "Disponivel"
+    hour.save()
+    response = json.dumps({'mensagem':'Alteração Concluida', 
+    'horas':float(hour.collaborator.total_horas)})
+    return HttpResponse(response, content_type='application/json')

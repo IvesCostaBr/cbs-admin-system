@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bootstrap4 %}
 
-{% block title %} Home {% endblock %}
+{% block title %} Editar Hora Extra | CBS {% endblock %}
 
 {% block header %}
-    {% include 'navbar.html'%}
+   
 {% endblock %}
 
 {% block main %}
@@ -14,21 +15,26 @@
 <br>
 <div class="container">
     <div class="row">
-        <form method="POST" enctype="multipart/form-data" >
+        <form method="POST" class="form-control"  enctype="multipart/form-data" >
             {% csrf_token %}
-        
-            {{ form }}
-            
+            {% bootstrap_form form %}
+            <br>
+
             {% if object %}
                 <button type="submit" class="btn btn-primary">Alterar</button>
+                <button type="button" class="btn btn-danger"
+                onclick="utilizouHoraExtra({{ object.id }})">Não Utilizar</button>
                 <button type="button" class="btn btn-success"
-                onclick="utilizouHoraExtra({{ object.id }})">Marcar Como Utilizado</button>
+                onclick="DisponibilizarHoraExtra({{ object.id }})">Utilizar</button>
             {% else %}
                 <button type="submit" class="btn btn-primary">Adicionar</button>
             {% endif %}
-            <p id="mensagem"></p>
             
+       
         </form> 
+     
+        <p id="total">{{ object.collaborator.total_horas }}</p>
+     
     </div>
 </div>
 
