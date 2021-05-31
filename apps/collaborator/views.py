@@ -22,13 +22,14 @@ class CreateCollaborator(CreateView):
 #TODO:realizar um refactore e from_valid
     def form_valid(self, form):
         collaborator = form.save(commit=False)#TODO:Não manda para o banco apenas criar o objeto  
-        if self.request.user.collaborator:
+        valid = Collaborator.objects.filter(user=self.request.user).exists()
+        if valid == True:
             username = collaborator.first_name + collaborator.last_name
             collaborator.user = User.objects.create(
-                username=username)
+                username=username, password=username)
         else:
             collaborator.user = self.request.user
-
+            
         collaborator.company = self.request.user.company_set.first()
         collaborator.save()  
         return super(CreateCollaborator, self).form_valid(form)
