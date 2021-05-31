@@ -9,9 +9,5 @@ from django.views.generic.base import View
 class HomePage(LoginRequiredMixin, TemplateView):
     template_name = 'core/home_page.html'
 
-class Teste(View):
-    def post(self,request, *args, **kwargs):
-        return HttpResponse('ok')
-
 
 

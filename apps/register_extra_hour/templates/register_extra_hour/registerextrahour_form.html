@@ -4,7 +4,7 @@
 {% block title %} Home {% endblock %}
 
 {% block header %}
-
+    {% include 'navbar.html'%}
 {% endblock %}
 
 {% block main %}
@@ -12,14 +12,29 @@
     <a href="{% url 'home_page' %}"  class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>voltar ao menu</a>
 <br>
 <br>
-<div class="row">
+<div class="container">
+    <div class="row">
         <form method="POST" enctype="multipart/form-data" >
             {% csrf_token %}
         
-            {{ form.collaborator}}
-            {{ form.reason}}
-            {{ form.hours }}
-            <button type="submit">Enviar</button>
-        </form>
+            {{ form }}
+            
+            {% if object %}
+                <button type="submit" class="btn btn-primary">Alterar</button>
+                <button type="button" class="btn btn-success"
+                onclick="utilizouHoraExtra({{ object.id }})">Marcar Como Utilizado</button>
+            {% else %}
+                <button type="submit" class="btn btn-primary">Adicionar</button>
+            {% endif %}
+            <p id="mensagem"></p>
+            
+        </form> 
+    </div>
 </div>
+
+
+{% endblock %}
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="{% static 'js/ajax-functions.js' %}" ></script>
 {% endblock %}
