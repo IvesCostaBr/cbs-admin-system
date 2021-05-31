@@ -11,7 +11,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', default=True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sistemarh.cerberussistem.com.br', '127.0.0.1']
 
 AppConfig.default = False #TODO:Setando default como False o django passa a aceitar apps vindo de diretorios diferente 
 AppConfig.ignore_patterns = [''] 
