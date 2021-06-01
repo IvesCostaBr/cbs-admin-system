@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = config('DEBUG', default=True)
+DEBUG = 0
 
 ALLOWED_HOSTS = ['sistemarh.cerberussistem.com.br', '127.0.0.1', 'localhost', '172.31.63.255']
 
