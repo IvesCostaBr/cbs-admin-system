@@ -1,16 +1,12 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block title %} Painel Collaborator{% endblock %}
-
 
 {% block header %}
     {% include 'navbar.html' %}
 {% endblock %}
 {% block main  %}
-<br>
-    <a href="{% url 'home_page' %}"  class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>voltar ao menu</a>
-<br>
 <div class="container">
     <div class="row">
         <h4>Bem Vindo {{ collaborator.user }}</h4> <br>
@@ -47,9 +43,13 @@
             {% endfor %}
             </tbody>
             </table>
+            <!-- <button onclick="RefreshDetailFuncionario({{ user.collaborator.id }})" type="button">Atualizar Horas</button> -->
         </div>
     </div>
 </div>
 
-
+{% endblock %}
+{% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="{% static 'js/ajax-functions.js' %}" ></script> 
 {% endblock %}
