@@ -11,7 +11,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', default=True)
 
-ALLOWED_HOSTS = ['sistemarh.cerberussistem.com.br', '127.0.0.1']
+ALLOWED_HOSTS = ['sistemarh.cerberussistem.com.br', '127.0.0.1', 'localhost', ]
 
 AppConfig.default = False #TODO:Setando default como False o django passa a aceitar apps vindo de diretorios diferente 
 AppConfig.ignore_patterns = [''] 
@@ -23,6 +23,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
 
     #myapps
     'apps.company',

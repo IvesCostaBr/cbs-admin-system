@@ -19,9 +19,10 @@ class Collaborator(models.Model):
 
     class Meta:
         pass
-
+    
     def somar_horas(self):
         if  self.registerextrahour_set.filter(status='Disponivel'):
+            print(self.total_horas)
             total = self.registerextrahour_set.filter(status='Disponivel').aggregate(Sum('hours'))['hours__sum']
             Collaborator.objects.all().update(total_horas=total)
         else:
