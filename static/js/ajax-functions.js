@@ -35,3 +35,13 @@ function DisponibilizarHoraExtra(id) {
         }
     });
 }
+
+// function RefreshDetailFuncionario(id) {
+//     $.ajax({
+//         type: "GET",
+//         url: "/collaborator/collaborator_detail/"+id+"/",
+//         success: function(result){
+//             M.toast({html: toastHTML})
+//         }
+//     })
+// }

@@ -56,3 +56,4 @@ class CollaboratorDelete(DeleteView):
 
 class CollaboratorDetail(DetailView):
     model = Collaborator
+

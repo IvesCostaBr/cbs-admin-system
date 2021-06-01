@@ -24,7 +24,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-
     #myapps
     'apps.company',
     'apps.collaborator',
@@ -34,7 +33,6 @@ INSTALLED_APPS = [
     'apps.core',
     'bootstrap4',
  
-
 ]
 
 MIDDLEWARE = [
@@ -118,7 +116,7 @@ STATICFILES_DIRS = [
     #'/var/www/static/',
 ]
 LOGIN_URL = 'login'        
-LOGIN_REDIRECT_URL = 'home_page'
-LOGOUT_REDIRECT_URL = 'home_page'
+LOGIN_REDIRECT_URL = 'redirect'
+LOGOUT_REDIRECT_URL = 'redirect'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
