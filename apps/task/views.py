@@ -10,6 +10,9 @@ from django.urls import reverse_lazy
 import xhtml2pdf.pisa as pisa
 from django.template.loader import get_template
 import io
+from django.core.mail import send_mail
+
+
 
 
 class PainelTask(TemplateView):
@@ -65,6 +68,14 @@ class Render:
 
 
 def relatorio_pdf(request):
+    send_mail(
+    'Ola123',
+    'Here is the message.',
+    'admin-sytem@cerberussistem.com.br ',
+    ['ivescosta@cerberussistem.com.br'],
+    fail_silently=False,
+)
+
     params = {
         'dado1':'valor1',
         'dado2': 'valor2',
