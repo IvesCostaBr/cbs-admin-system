@@ -1,0 +1,23 @@
+{% extends "base.html"%}
+{% load bootstrap4 %}
+
+{% block title %}Task Manager | CBS-System{% endblock %}
+
+{% block main %}
+<div class="container">
+    <h4 style="text-align:center" >Criar Tarefa</h4>
+    <div class="row">
+        <div class="col-sm">
+            <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <br>
+            <button class="btn btn-success" type="submit">Cadastrar</button>
+            </form>
+        </div>
+        <div class="col-sm">
+            Hllor word
+        </div>
+    </div>
+</div>
+{% endblock %}

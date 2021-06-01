@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'apps.documents',
     'apps.register_extra_hour',
     'apps.core',
+    'apps.task',
     'bootstrap4',
  
 ]

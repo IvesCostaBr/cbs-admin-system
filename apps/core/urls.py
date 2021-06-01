@@ -13,5 +13,6 @@ urlpatterns = [
     path('collaborator/',include('apps.collaborator.urls')),
     path('documents/', include('apps.documents.urls')),
     path('hourdatabase/', include('apps.register_extra_hour.urls')),
+    path('task/', include('apps.task.urls')),
     
 ]
