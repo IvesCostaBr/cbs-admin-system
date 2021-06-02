@@ -3,13 +3,18 @@ from decouple import config
 import os
 from django.apps import AppConfig
 
+ADMINS = [('IvesCosta', 'ivescosta@cerberussistem.com.br')]
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 SECRET_KEY = config('SECRET_KEY')
 
+<<<<<<< HEAD
 DEBUG = 0
+=======
+DEBUG = config('DEBUG')
+>>>>>>> 4fe6169acbb5d47d9a9b1eb6f16917d1b8a58dec
 
 ALLOWED_HOSTS = ['sistemarh.cerberussistem.com.br', '127.0.0.1', 'localhost', '172.31.63.255']
 
@@ -36,6 +41,7 @@ INSTALLED_APPS = [
     'apps.task',
     'bootstrap4',
     'django_celery_results',
+    'django_celery_beat',
  
 ]
 
@@ -130,3 +136,10 @@ CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
+
+
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_SSL = 1

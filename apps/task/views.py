@@ -10,6 +10,9 @@ from django.urls import reverse_lazy
 import xhtml2pdf.pisa as pisa
 from django.template.loader import get_template
 import io
+from .tasks import send_relatorio
+
+
 
 
 class PainelTask(TemplateView):
@@ -65,13 +68,7 @@ class Render:
 
 
 def relatorio_pdf(request):
-    params = {
-        'dado1':'valor1',
-        'dado2': 'valor2',
-        'dado3':'valor3',
-        'request': request
-
-    }
-    return Render.render('task/relatorio.html', params, 'myfile')
+    send_relatorio.delay()
+    return HttpResponse('OK')
 
 
