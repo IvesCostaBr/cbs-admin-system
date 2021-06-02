@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 import xhtml2pdf.pisa as pisa
 from django.template.loader import get_template
 import io
-from django.core.mail import send_mail
+from .tasks import send_relatorio
 
 
 
@@ -68,21 +68,7 @@ class Render:
 
 
 def relatorio_pdf(request):
-    send_mail(
-    'Ola123',
-    'Here is the message.',
-    'admin-sytem@cerberussistem.com.br ',
-    ['ivescosta@cerberussistem.com.br'],
-    fail_silently=False,
-)
-
-    params = {
-        'dado1':'valor1',
-        'dado2': 'valor2',
-        'dado3':'valor3',
-        'request': request
-
-    }
-    return Render.render('task/relatorio.html', params, 'myfile')
+    send_relatorio.delay()
+    return HttpResponse('OK')
 
 

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'apps.task',
     'bootstrap4',
     'django_celery_results',
+    'django_celery_beat',
  
 ]
 
