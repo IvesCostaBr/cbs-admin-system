@@ -5,6 +5,10 @@ from django.views.generic.edit import UpdateView, DeleteView
 #from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .models import Company
 from django.urls import reverse_lazy
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
+
+
 
 
 class CreateCompany(CreateView):
@@ -17,7 +21,7 @@ class CreateCompany(CreateView):
             obj.gerente = self.request.user
             obj.save()
         
-        return redirect('home_page')
+        return redirect('redirect')
 
 
 class ListCompany(View):
@@ -33,7 +37,7 @@ class UpdateCompany(UpdateView):
 
 class DeleteCompany(DeleteView):
     model = Company
-    success_url =  reverse_lazy('home_page')
+    success_url =  reverse_lazy('redirect')
     
 
 

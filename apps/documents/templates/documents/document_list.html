@@ -13,6 +13,7 @@
         {% for c in document_list %}<br>
         {{ c }}
         {{ c.owner }}
+        
         <a href="{{ c.file.url }}">Acessar</a>
         <a href="{% url 'delete_document' c.id %}">Deletar</a>
         <a href="{% url 'update_document' c.id %}">Editar</a>

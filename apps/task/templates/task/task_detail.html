@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+Detalhe Tarefa {{ task.id }} | CBS Admin-System
+{% endblock %}
+
+{%  block header %}
+    {% include "navbar.html" %}
+    <br>
+    <br>
+{% endblock %}
+{% block main %}
+    <h4>Detalhe {{ task.id }}</h4>
+    {{ task.title }}<br>
+    {{ task.description }}<br>
+    {{ task.date_creation }}
+    {{ task.final_date }}<br>
+    {{ task.status }}
+
+{% endblock %}

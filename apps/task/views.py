@@ -3,6 +3,7 @@ from django.views.generic import (
     TemplateView,
     CreateView, 
     ListView,
+    DetailView,
 )
 from django.views.generic.edit import UpdateView
 from .models import Task
@@ -11,8 +12,8 @@ import xhtml2pdf.pisa as pisa
 from django.template.loader import get_template
 import io
 from .tasks import send_relatorio
-
-
+import json
+from django.utils import timezone
 
 
 class PainelTask(TemplateView):
@@ -34,6 +35,9 @@ class CreateTask(CreateView):
 
 class ListTasks(ListView):
     model = Task
+
+    def get_queryset(self):
+        return Task.objects.filter(collaborator=self.request.user.collaborator)
 
 
 class UpdateTask(UpdateView):
@@ -66,9 +70,31 @@ class Render:
             return HttpResponse('Erro ao renderizar PDF',status=400)
 
 
+def taskComplete(request, id):
+    task = Task.objects.get(id=id)
+    if task != None:
+        task.status = 1
+        task.final_date(timezone)
+        task.save()
+        response = json.dumps({ 'status':'Concluida'})
+        return HttpResponse(response, content_type='application/json')
+
+
 
 def relatorio_pdf(request):
     send_relatorio.delay()
     return HttpResponse('OK')
 
 
+
+class DetailTask(DetailView):
+    model = Task
+    
+
+# def disponibilizar_hora(request,id):
+#     hour = RegisterExtraHour.objects.get(id=id)
+#     hour.status = "Disponivel"
+#     hour.save()
+#     response = json.dumps({'mensagem':'Alteração Concluida', 
+#     'horas':float(hour.collaborator.total_horas)})
+#     return HttpResponse(response, content_type='application/json')

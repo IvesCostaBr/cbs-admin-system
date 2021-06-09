@@ -1,41 +1,54 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %} Painel Collaborator{% endblock %}
+{% block title %} Painel Collaborator {% endblock %}
 
 {% block header %}
     {% include 'navbar.html' %}
+    <br>
+<br>
+<br>
+<br>
 {% endblock %}
 {% block main  %}
+
 <div class="container">
     <div class="row">
-        <h4>Bem Vindo {{ collaborator.user }}</h4> <br>
-        <div class="col-lg"><br>
+        <h4>Bem Vindo {{ collaborator.user.collaborator.first_name }}</h4> <br>
+        <div class="col-lg">
             <p>Configurações usuario</p>
             {% if user.is_staff %}<br>
-            <a  href="{% url 'painel_collaborator'  %}" class="waves-effect waves-light btn"><i class="material-icons left">cached</i>Gestão de Funcionarios</a><br>
+            <a  href="{% url 'painel_collaborator'  %}" class="waves-effect blue darken-1 btn"><i class="material-icons left">recent_actors</i>Gestão de Funcionarios</a><br>
             {% endif %}<br>
-            <a  href="{% url 'edit_collaborator' user.collaborator.id %}" class="waves-effect waves-light btn"><i class="material-icons left">cached</i>Editar Dados</a><br>
+            <a  href="{% url 'list_tasks' %}" class="waves-effect light-blue lighten-3 btn"><i class="material-icons left">done_all</i>Suas Tarefas</a><br>
             <br>
-            <a  href="{% url 'list_documents'  %}" class="waves-effect waves-light btn"><i class="material-icons left">cached</i>Meus Documentos</a>
+            <a  href="{% url 'edit_collaborator' user.collaborator.id %}" class="waves-effect teal darken-2 waves-light btn"><i class="material-icons left">build</i>Editar Dados</a><br>
+            <br>
+            <a  href="{% url 'list_documents'  %}" class="waves-effect teal accent-3 btn"><i class="material-icons left">folder_open</i>Meus Documentos</a>
         </div>
-        <div class="col-lg"><br>
-            <h5>Registros de Hora Extra</h5> <br>
+        <div class="col-lg">
+            <h5>Registros de Hora Extra</h5>
             <h7>Total de Horas : {{ user.collaborator.total_horas }} HORAS</h7>
-            <table>
+            <table class="table table-hover" >
                 <thead>
                   <tr>
                       <th>Data</th>
                       <th>Motivo</th>
                       <th>Horas</th>
+                      <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
             {% for hour in  user.collaborator.registerextrahour_set.all %}
-                  <tr>
+                    {% if hour.status != 'Disponivel' %}
+                        <tr class="table-danger"> 
+                    {% else %}
+                        <tr class="table-success"> 
+                    {% endif %}
                     <td>{{ hour.date }}</td>
                     <td>{{ hour.reason }}</td>
                     <td>{{ hour.hours }} Horas</td>
+                    <td>{{ hour.status }}</td>
                   </tr> 
                
             {% empty %}
@@ -49,6 +62,11 @@
 </div>
 
 {% endblock %}
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock %}
+
 {% block scripts %}
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="{% static 'js/ajax-functions.js' %}" ></script> 

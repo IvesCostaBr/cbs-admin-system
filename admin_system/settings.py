@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'django_celery_results',
     'django_celery_beat',
+    'corsheaders',
  
 ]
 
@@ -52,6 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'admin_system.urls'
@@ -78,6 +81,10 @@ WSGI_APPLICATION = 'admin_system.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'antigo': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
@@ -118,12 +125,18 @@ MEDIA_ROOT = 'media/'
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+# STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+#     #'/var/www/static/',
+# ]
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    #'/var/www/static/',
+    '/var/www/static/',
 ]
+
 LOGIN_URL = 'login'        
 LOGIN_REDIRECT_URL = 'redirect'
 LOGOUT_REDIRECT_URL = 'redirect'
@@ -142,3 +155,9 @@ EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = 1
+
+CORS_ALLOWED_ORIGINS = [
+
+    "http://localhost:4200",
+
+]

@@ -23,8 +23,8 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Empresa</th>
-                <th>Username</th>
                 <th>T/Horas</th>
+                <th>Online</th>
                 <th>Opções</th>
             </tr>
             </thead>
@@ -35,8 +35,21 @@
                     <td>{{ c.id }}</td> 
                     <td>{{ c.first_name }}</td>
                     <td>{{ c.company.name }}</td>
-                    <td>{{ c.user.username }}</td>
                     <td>{{ c.total_horas }}Horas</td>
+                    {% if c.logged %}
+                      <td>
+                        <div class="spinner-grow text-success" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                      </td>
+                    {% else %}
+                    <td>
+                      <div class="spinner-grow text-danger" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </td>
+                    {% endif %}
+                    
                     <td><a  href="{% url 'edit_collaborator' c.id  %}" class="waves-effect waves-light btn"><i class="material-icons left">cached</i></a></td>
                     <td><a  href="{% url 'collaborator_delete' c.id  %}" class="waves-effect pink accent-3 btn"><i class="material-icons left">delete_forever</i></a></td>
                    

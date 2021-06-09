@@ -36,6 +36,38 @@ function DisponibilizarHoraExtra(id) {
     });
 }
 
+function process_response(funcionarios){
+    func_select = document.getElementById("funcionarios");
+    func_select.innerHTML = "";
+
+    funcionarios.forEach(function(funcionario){
+        var option = document.createElement("option");
+        option.text = funcionario.field.first_name;
+        func_select.add(option);
+    });
+
+}
+
+function filtrarFuncionario(){
+    depart_id = document.getElementsByName("departaments").value;
+    $.ajax({
+        type: 'GET',
+        url: '/collaborator/list_collaborator/',
+        data : {
+            other_params : depart_id
+        },
+        success: function(result){
+            process_response(result);
+            $("#mensagem").text('Funcionario Cadastrado')
+        }
+    });
+}
+
+function alterarTask(id) {
+    alert(id);
+
+}
+
 // function RefreshDetailFuncionario(id) {
 //     $.ajax({
 //         type: "GET",
@@ -45,3 +77,4 @@ function DisponibilizarHoraExtra(id) {
 //         }
 //     })
 // }
+
