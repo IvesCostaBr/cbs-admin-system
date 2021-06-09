@@ -125,18 +125,12 @@ MEDIA_ROOT = 'media/'
 
 STATIC_URL = '/static/'
 
-# STATIC_ROOT = os.path.join(BASE_DIR, "static/")
-
-# STATICFILES_DIRS = [
-#     BASE_DIR / "static",
-#     #'/var/www/static/',
-# ]
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    '/var/www/static/',
+    #'/var/www/static/',
 ]
-
 LOGIN_URL = 'login'        
 LOGIN_REDIRECT_URL = 'redirect'
 LOGOUT_REDIRECT_URL = 'redirect'
