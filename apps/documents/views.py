@@ -40,7 +40,7 @@ class CreateDocument(CreateView):
         return super(CreateDocument, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse('collaobrator_page', args=[self.request.user.collaborator.id])
+        return reverse('list_documents')
 
 class UpdateDocument(UpdateView):
     model = Document

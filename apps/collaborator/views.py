@@ -6,7 +6,25 @@ from django.contrib.auth.models import User
 from .models import Collaborator
 from .forms import CollaboratorForm
 from django.urls import reverse_lazy, reverse
+from apps.departament.models import Departament
+from django.contrib.auth import views
 
+
+
+class LoginEnable(views.LoginView):
+    def get_success_url(self):
+        collaborator = Collaborator.objects.get(user=self.request.user)
+        collaborator.logged = True
+        collaborator.save()
+        return super(LoginEnable, self).get_success_url()
+
+
+class LoginDisable(views.LogoutView):
+    def dispatch(self, request, *args, **kwargs):
+        collaborator = Collaborator.objects.get(user=self.request.user)
+        collaborator.logged = False
+        collaborator.save()
+        return super(LoginDisable, self).dispatch(request,*args, **kwargs)
 
 class CollaboratorPage(DetailView):
     model = Collaborator
@@ -18,6 +36,7 @@ class HomeCollaboratorPainelAdmin(TemplateView):
 class CreateCollaborator(CreateView):
     template_name = 'collaborator/collaborator_form.html'
     form_class = CollaboratorForm
+
 
 #TODO:realizar um refactore e from_valid
     def form_valid(self, form):
@@ -33,6 +52,8 @@ class CreateCollaborator(CreateView):
         collaborator.company = self.request.user.company_set.first()
         collaborator.save()  
         return super(CreateCollaborator, self).form_valid(form)
+
+
 
 
 class EditDataCollaborator(UpdateView):
@@ -57,3 +78,11 @@ class CollaboratorDelete(DeleteView):
 class CollaboratorDetail(DetailView):
     model = Collaborator
 
+def filtaFuncionario(request):
+    from django.core import serializers
+    from django.http import HttpResponse
+    
+    depart = request.GET['other_params']
+    departamento= Departament.objects.get(id=depart)
+    qs_json = serializers.serialize('json', departamento.collaborato_set.all())
+    return HttpResponse(qs_json, content_type='application/json')

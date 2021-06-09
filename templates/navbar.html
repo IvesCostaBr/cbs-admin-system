@@ -4,28 +4,36 @@
 {% block links %}
 <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 <link rel="stylesheet" href="{%  static 'css/materialize.css' %}">
+<link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<link href="https://getbootstrap.com/docs/5.0/examples/headers/headers.css" rel="stylesheet">
 {% endblock %}
 
 {% block header %}
-<nav>
-  <div class="nav-wrapper purple">
-    <a href="">CBS Admin-system</a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="">Minha Conta</a></li>
-      <li><a href="">Notificações <span class="new badge">4</span></a></li>
-      <li>
-        {% if user.is_authenticated %}
-              <a  class="waves-effect pink accent-3 btn" href="{% url 'logout' %}"><i class="material-icons left">keyboard_tab</i>Sair</a>
-        {% else %}
-              <a  class="btn btn-success"href="{% url 'login' %}">Login</a>
-        {% endif %}
-      </li>
-    </ul>
-  </div>
-</nav>
+  <header class="p-3 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <img class="logo" alt="logo" style=" max-height: 90px;" src="{% static 'cerberus_logo.png'  %}">
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="{% url 'redirect' %}" class="nav-link px-2 text-secondary">Home</a></li>
+          <li><a href="{% url 'collaborator_page' user.collaborator.id  %}" class="nav-link px-2 text-white">Sistema</a></li>
+        </ul>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+          <input type="search" class="form-control form-control-dark" placeholder="pesquisa..." aria-label="Search">
+        </form>
+
+        <div class="text-end">
+          {% if user.is_authenticated %}
+            <a  href="{% url 'logout' %}" class="btn btn-outline-danger me-2">Sair</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </header>
 {% endblock %}
 {% block scripts %}
-
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
 {% endblock %}

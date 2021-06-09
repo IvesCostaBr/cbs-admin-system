@@ -3,35 +3,22 @@
 
 {% block header %}
     {% include 'navbar.html' %}
+    <br>
+    <br>
+    <br>
 {% endblock %}
 
 
 {% block main %} 
 <br>
 <div class="container">
-    <h3 style="text-align:center" >New Collaborator</h3>
+    <h3 style="text-align:center" >Collaborator</h3>
     <div class="row">
         <form method="post" enctype="multipart/form-data" class="col s12">
         {% csrf_token %}
-        <div class="row">
-            <div class="input-field col s6">
-                {{ form.first_name }}
-                <label for="first_name">First Name</label>
-            </div>
-            <div class="input-field col s6">
-                {{ form.last_name }}
-                <label for="first_name">First Name</label>
-                {{ form.departaments }}
-            </div>
-        </div>
-        <!--<div class="row">
-            <div class="input-field col s12">
-            {{ form.departaments }}
-            <label for="departaments">Departaments</label>
-            </div>
-        </div>
-        -->
-        <button class="waves-effect pink blue darken-3 btn" >Cadastrar</button>
+        {{ form.first_name}}
+        {{ form.last_name}}  
+        <button class="waves-effect pink blue darken-3 btn" >Inserir</button>
         </form>
     </div>
 </div>

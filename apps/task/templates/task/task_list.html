@@ -1,17 +1,52 @@
+{% extends "base.html"%}
+{% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {% for t in task_list %}
-    <br>
-    {{ t }}<a href="{% url 'edit_task' t.id %}" >Editar</a>
-    {% endfor %}
 
-</body>
-</html>
+{% block title %}Lista de Tarefas{% endblock %}
+
+{% block header %}
+    {% include 'navbar.html' %}
+
+{% endblock %}
+
+
+{% block main %}
+
+<div class="container">
+  <div class="row">
+    <table class="table" >
+        <thead>
+          <tr>
+            <th>CODE</th>
+            <th>Departamento</th>
+            <th>Colaborador</th>
+            <th>Titulo</th>
+
+            <th>Data de Conclusão</th>
+            <th>Status</th>
+            <th>Concluir</th>
+          </tr>
+        </thead> 
+        <tbody>
+            {% for task in task_list %}
+            <tr>
+                <td><a href="{% url 'detail_task' task.id %}" >{{ task.id }}</a></td>
+                <td>{{ task.departament.name_of_departament }}</td>
+                <td>{{ task.collaborator.first_name }}</td>
+                <td>{{ task.title }}</td>
+
+                <td>{{ task.final_date }}</td>
+                <td id="tarefa" >{{ task.status }}</td>
+                <td><button onclick="alterarTask({{ task.id}});">Concluir</button></td>
+              </tr>
+            {% endfor %}     
+        </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="{% static 'js/ajax-functions.js' %}" ></script>
+{% endblock %}

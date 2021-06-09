@@ -7,3 +7,5 @@
 *.dat
 *.pid
 *.dir
+celery.service
+celerybeat-schedule

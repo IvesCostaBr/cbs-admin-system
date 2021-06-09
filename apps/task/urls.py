@@ -4,7 +4,9 @@ from .views import (
     CreateTask,
     ListTasks,
     UpdateTask,
-    relatorio_pdf
+    relatorio_pdf,
+    taskComplete,
+    DetailTask,
 )
 
 
@@ -15,4 +17,6 @@ urlpatterns = [
     path('list_tasks/', ListTasks.as_view(), name='list_tasks'),
     path('edit_tasks/<int:pk>/', UpdateTask.as_view(), name='edit_task'),
     path('relatorio/', relatorio_pdf, name='relatorio_pdf'),
+    path('task-complete/<int:id>/', taskComplete, name='taskComplete'),
+    path('task-detail/<int:pk>/', DetailTask.as_view(), name='detail_task'),
 ]

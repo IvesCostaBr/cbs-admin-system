@@ -2,6 +2,7 @@ from django.db import models
 from apps.departament.models import Departament
 from apps.collaborator.models import Collaborator
 from django.utils import timezone
+from apps.company.models import Company
 
 # Create your models here.
 
@@ -15,6 +16,7 @@ class Task(models.Model):
 
     departament = models.ForeignKey(Departament, on_delete=models.PROTECT)
     collaborator = models.ForeignKey(Collaborator, on_delete=models.PROTECT)
+    company = models.ForeignKey(Company, on_delete=models.PROTECT, null=True, blank=True)
     title = models.CharField(max_length=40)
     description = models.TextField(max_length=300)
     date_creation = models.DateField(default=timezone.now)

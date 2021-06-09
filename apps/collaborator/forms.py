@@ -25,4 +25,4 @@ class CollaboratorForm(ModelForm):
 
     class Meta:
         model = Collaborator
-        fields = ['first_name', 'last_name']
+        fields = ['first_name', 'last_name','profile_photo']
