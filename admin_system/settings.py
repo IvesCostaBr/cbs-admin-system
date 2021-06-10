@@ -148,12 +148,3 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = 1
 
-<<<<<<< HEAD
-CORS_ALLOW_CREDENTIALS = True
-
-CORS_ALLOWED_ORIGINS = [
-
-    "http://localhost:4200",
-]
-=======
->>>>>>> 4fc54e70d2e5e7547eb54b80d451eafa328021b4
