@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Painel Collaborator{% endblock %}
+
+{% block header %}
+    {% include 'navbar.html' %}
+    <br>
+    <br>
+    <br>
+{% endblock %}
+
+{% block main  %}
+
+<div class="container">
+    <div class="row">
+        <div class="container">
+            <a class="waves-effect waves-light btn-large" href="{% url 'new_collaborator'  %}" >Adicionar Colaborador</a><br>
+            <br>
+            <a class="waves-effect waves-light btn-large" href="{% url 'list_collaborators' %}" >Lista de Colaboradores</a><br>
+            <br>
+            <a class="waves-effect waves-light btn-large" href="{% url 'collaborator_detail'  user.collaborator.id %}">Configurações de Conta</a>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

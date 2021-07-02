@@ -1,0 +1,25 @@
+{% extends "base.html"%}
+
+
+{% block header %}
+    {% include 'navbar.html' %}
+    <br>
+    <br>
+    <br>
+{% endblock %}
+
+
+{% block main %} 
+<br>
+<div class="container">
+    <h3 style="text-align:center" >Collaborator</h3>
+    <div class="row">
+        <form method="post" enctype="multipart/form-data" class="col s12">
+        {% csrf_token %}
+        {{ form }}
+        <button style="margin-top: 30px;" class="waves-effect pink green darken-3 btn" >Cadastrar</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title%} Cadastro Empresas| CB-SYSTEM {% endblock %}
+
+{% block header %}
+{% include "navbar.html"%}
+{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-lg">
+        Menu
+        <a href="{% url 'list_departaments'%}">Departamentos</a>
+    </div>
+    <div class="col-lg">
+        <h5>Empresa : {{ company.name }}<br>
+            <h9>Gerente:{{ company.gerente}}</h9><br>
+            <h9>CNPJ:{{ company.cnpj }}</h9><br>
+            <h9>Telefone:{{ company.telefone }}</h9><br>
+            <a href="{% url 'update_company' company.id %}" >Editar</a>
+            <a href="{% url 'delete_company' company.id %}" >Deletar</a></h5>
+        <br>
+    </div>
+</div>
+{% endblock %}

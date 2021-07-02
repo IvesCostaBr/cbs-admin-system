@@ -1,0 +1,47 @@
+{%  extends  "base.html" %}
+
+
+{% block title  %}Filtro{% endblock %}
+
+{% block header %}
+    {% include "navbar.html" %}
+{% endblock %}
+
+
+{% block main %}
+    <div class="container" >
+        <table class="table" >
+            <thead>
+              <tr>
+                <th>CODE</th>
+                <th>Departamento</th>
+                <th>Colaborador</th>
+                <th>Titulo</th>
+    
+                <th>Data de Conclusão</th>
+                <th>Status</th>
+                <th>Concluir</th>
+              </tr>
+            </thead> 
+            <tbody>
+                {% for task in lista %}
+                <tr>
+                    <td><a href="{% url 'detail_task' task.id %}" >{{ task.id }}</a></td>
+                    <td>{{ task.departament.name_of_departament }}</td>
+                    <td>{{ task.collaborator.first_name }}</td>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.final_date }}</td>
+                    {% if task.status %}
+                      <td><strong class="online" id="tarefa" >CONCLUIDO</strong></td>
+                    {% else %}
+                      <td><strong class="offline" id="tarefa" >NÃO CONCLUIDO</strong></td>
+                    {% endif %}
+                    <td><button class="btn btn-success"onclick="alterarTask({{ task.id}});">Marcar</button></td>
+                  </tr>
+                  {% empty %}
+                    <p>Não foram encontrados registros</p>
+                {% endfor %}     
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

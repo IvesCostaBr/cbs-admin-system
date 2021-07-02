@@ -1,0 +1,89 @@
+{% extends "base.html"%}
+{% load static %}
+
+
+{% block title %}Lista de Tarefas{% endblock %}
+
+{% block header %}
+    {% include 'navbar.html' %}
+
+{% endblock %}
+
+
+{% block main %}
+<div class="container">
+  <div class="row">
+    <form method="POST" enctype="multipart/form-data" action="{% url 'list_my_task' %}">
+      {% csrf_token %}
+      <label for="pesquisa">Pesquisa</label>
+      <input type="text" name="pesquisa" placeholder="Digite o setor para buscar tarefa"/>
+      <button type="submit" class="btn btn-success">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+      </button>
+    </form>
+    <table class="responsive-table" >
+        <thead>
+          <tr>
+            <th>CODE</th>
+            <th>Departamento</th>
+            <th>Colaborador</th>
+            <th>Titulo</th>
+
+            <th>Data de Conclusão</th>
+            <th>Status</th>
+            <th>Concluir</th>
+          </tr>
+        </thead> 
+        <tbody>
+            {% for task in task_list %}
+            <tr>
+                <td><a href="{% url 'detail_task' task.id %}" >{{ task.id }}</a></td>
+                <td>{{ task.departament.name_of_departament }}</td>
+                <td>{{ task.collaborator.first_name }}</td>
+                <td>{{ task.title }}</td>
+                <td>{{ task.final_date }}</td>
+                {% if task.status %}
+                  <td><strong class="online" id="tarefa" >CONCLUIDO</strong></td>
+                {% else %}
+                  <td><strong class="offline" id="tarefa" >NÃO CONCLUIDO</strong></td>
+                {% endif %}
+                <td><button class="btn btn-success"onclick="alterarTask({{ task.id}});">Marcar</button></td>
+              </tr>
+            {% endfor %}     
+        </tbody>
+    </table>
+  </div>
+  {% for contact in page_obj %}
+    {# Each "contact" is a Contact model object. #}
+    {{ contact.full_name|upper }}
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; primeira</a>
+            <a href="?page={{ page_obj.previous_page_number }}">anterior</a>
+        {% endif %}
+
+        <span class="current">
+            Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">proxima</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">anterior &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+
+
+
+
+{% endblock %}
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="{% static 'js/ajax-functions.js' %}" ></script>
+{% endblock %}

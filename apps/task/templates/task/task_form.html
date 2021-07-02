@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+
+
+{% block links %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
+{% endblock %}
+
+{% block title %}Task Manager | CBS-System{% endblock %}
+
+{% block header %}
+    {% include 'navbar.html' %}
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <h4 style="text-align:left; margin-bottom: 25px;" >Criar Tarefa</h4>
+    <div class="row">
+        <form method="POST" enctype="multipart/form-data" >
+        {% csrf_token %}
+        {{ form| bootstrap_horizontal:'col-lg-4' }}
+        <a href="{% url 'list_tasks' %}" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">arrow_back</i></a>
+        <button class="waves-effect light-green darken-3 btn" type="submit">Salvar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

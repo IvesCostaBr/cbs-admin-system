@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+Detalhe Tarefa {{ task.id }} | CBS Admin-System
+{% endblock %}
+
+{%  block header %}
+    {% include "navbar.html" %}
+    <br>
+    <br>
+{% endblock %}
+{% block main %}
+<div class="container c2">
+    {% if user.is_staff %}
+    <br>
+    <a href="{% url 'edit_task' task.id  %}" class="btn-floating btn-large  blue darken-1 waves-light red"><i class="material-icons">border_color</i></a>
+    {% endif %}
+    <h4>Detalhe Tarefa #{{ task.id }}</h4>
+    <strong>Titulo:</strong>{{ task.title }}<br>
+    <strong>Funcionario:</strong>{{ task.collaborator }}<br>
+    <strong>Descrição:</strong>{{ task.description }}<br>
+    <strong>Data de Criação:</strong>{{ task.date_creation }}<br>
+    <strong>Data de Entrega:</strong>{{ task.final_date }}<br>
+    {% if task.file_task %}
+        <strong>Arquivo:</strong><a href="{{ task.file_task.url }}">Baixar</a><br>1
+    {% endif %}
+    <form method="POST" action="{% url 'detail_task' task.id %}" enctype="multipart/form-data" >
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" >Subir Arquivo</button>
+    </form>
+    {% if task.status %}
+        <strong>Status da Tarefa:<p class="online" >CONCLUIDO</p></strong><br>
+    {% else %}
+        <strong>Status da Tarefa:<p class="offline" >NÃO CONCLUIDO</p></strong><br>
+    {% endif %}
+</div>
+   
+
+{% endblock %}

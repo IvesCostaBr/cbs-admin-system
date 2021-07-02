@@ -1,0 +1,22 @@
+{% extends "base.html"%}
+{% load static %}
+
+{% block title %}  Tarefa Painel | HomeWork {% endblock %}
+
+{% block header %}
+    {% include 'navbar.html' %}
+{% endblock %}
+
+
+{% block main %}
+    <div class="container" >
+        <div class="row">
+            <div class="col-lg-5">
+                <h3 id="titulos" style="text-align:center" >Tarefas Painel </h3>
+                <a id="buton" class="btn btn-success" href="{% url 'create_task' %}" >Cadastrar</a>
+                <a id="buton" class="btn btn-warnning" href="{% url 'list_tasks' %}" >Listagem</a>
+                <a id="buton" class="btn btn-primary" href="{% url 'relatorio_pdf' %}" >Relatorio PDF</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

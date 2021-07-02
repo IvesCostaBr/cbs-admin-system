@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Painel Deparaments{% endblock %}
+
+
+{% block header %}
+    {% include 'navbar.html' %}
+{% endblock %}
+{% block main %}
+<div class="container">
+    <h3>Lista de Arquivos</h3>
+    {% if document_list %}
+        {% for c in document_list %}<br>
+        {{ c }}
+        {{ c.owner }}
+        
+        <a href="{{ c.file.url }}">Acessar</a>
+        <a href="{% url 'delete_document' c.id %}">Deletar</a>
+        <a href="{% url 'update_document' c.id %}">Editar</a>
+        {% endfor %}
+    {% else %}
+    
+    <h6>Sem Documentos Cadastrados</h6>
+    {% endif %}
+    <br>
+    <a  href="{% url 'create_document' %}" class="waves-effect waves-light btn"><i class="material-icons left">cached</i>Adicionar Documentos</a><br>
+    <br>
+</div>
+    
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,12 @@
+.venv
+.env
+*.sqlite3
+*pyc
+.vscode
+*.bak
+*.dat
+*.pid
+*.dir
+celery.service
+celerybeat-schedule
+.vscode

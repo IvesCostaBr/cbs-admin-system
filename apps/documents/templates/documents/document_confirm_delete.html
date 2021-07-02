@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Painel Deparaments{% endblock %}
+
+
+{% block header %}
+    {% include 'navbar.html' %}
+{% endblock %}
+{% block main %}
+<div class="container">
+    <h3>Deseja deletar o documento de titulo : {{ document }}</h3>
+    <div class="row">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit"> Deletar</button>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

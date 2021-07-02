@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Painel Deparaments{% endblock %}
+
+
+{% block header %}
+    {% include 'navbar.html' %}
+{% endblock %}
+{% block main %}
+<div class="container">
+    <h3>Arquivos</h3>
+    <div class="row">
+        <a href="{% url 'list_documents' %}">List</a>
+        <a href="{% url 'create_document' %}">Criar</a>
+    </div>
+</div>
+
+
+{% endblock %}

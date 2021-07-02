@@ -1,0 +1,67 @@
+{% extends "base.html"%}
+{% load static %}
+{% block title %} Lista de Colaboradores {% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{%  static 'css/materialize.css' %}">
+{% endblock %}
+
+{% block header %}
+{% include 'navbar.html'%}
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <br>
+        <div class="container c2">
+          <strong style="text-align:center;" >Notificações</strong>
+        </div>
+      </div>
+      <div class="col">
+        <h5 style="text-align:center;" >Lista de Funcionarios</h5>
+        <table>
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Empresa</th>
+                <th>T/Horas</th>
+                <th>Online</th>
+                <th>Opções</th>
+            </tr>
+            </thead>
+            <tbody>
+                <p> Total {{ collaborator_list.count }} 
+                  Collaborad{{ collaborator_list.count | pluralize:"or,ores" }}</p>
+                {% for c in collaborator_list %}
+                
+                <tr id="{{c.user.first_name}}">
+                    <td>{{ c.user.first_name}}</td>
+                    <td>{{ c.company.name}}</td>
+                    <td>{{ c.total_horas }}Horas</td>
+                    {% if c.logged %}
+                      <td>
+                        <div class="ball b1"></div>
+                      </td>
+                    {% else %}
+                    <td>
+                      <div class="ball b2"></div>
+                    </td>
+                    {% endif %}
+                    <td><a  href="{% url 'edit_collaborator' c.id  %}" class="waves-effect waves-light btn"><i class="material-icons left">cached</i></a></td>
+                    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+                    <td><button   class="waves-effect pink accent-3 btn" onclick="removeCollaborator({{ c.id }}, {{c.user.first_name}})" ><i class="material-icons left">delete_forever</i></button></td>        
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %} 
+<script src="{% static 'js/ajax-functions.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+{% endblock %}

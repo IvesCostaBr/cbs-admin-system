@@ -1,0 +1,225 @@
+{% include 'base.html'%}
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="https://www.bootstrapdash.com/demo/skydash/template/vendors/feather/feather.css" >
+<link rel="stylesheet" href="https://www.bootstrapdash.com/demo/skydash/template/vendors/ti-icons/css/themify-icons.css" >
+<link rel="stylesheet" href="https://www.bootstrapdash.com/demo/skydash/template/vendors/css/vendor.bundle.base.css" >
+
+<link rel="stylesheet" href="https://www.bootstrapdash.com/demo/skydash/template/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+<link rel="stylesheet" href="https://www.bootstrapdash.com/demo/skydash/template/vendors/ti-icons/css/themify-icons.css">
+<link rel="stylesheet" type="text/css" href="https://www.bootstrapdash.com/demo/skydash/template/js/select.dataTables.min.css">
+
+<link rel="stylesheet" href="https://www.bootstrapdash.com/demo/skydash/template/css/vertical-layout-dark/style.css">
+{% endblock %}
+
+
+{% block header %}
+<div class="container-scroller">
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo mr-5" href="{% url 'redirect' %}">HomeWork CBS</a>
+        <a class="navbar-brand brand-logo-mini" href="{% url 'redirect' %}">HomeWork CBS</a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>
+        <ul class="navbar-nav mr-lg-2">
+          <li class="nav-item nav-search d-none d-lg-block">
+            <div class="input-group">
+              <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                <span class="input-group-text" id="search">
+                  <i class="icon-search"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item dropdown">
+            <a class="nav-link count-indicator" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+              <i class="icon-bell mx-0"></i>
+              <span class="count"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+              <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-success">
+                    <i class="ti-info-alt mx-0"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <h6 class="preview-subject font-weight-normal">Application Error</h6>
+                  <p class="font-weight-light small-text mb-0 text-muted">
+                    Just now
+                  </p>
+                </div>
+              </a>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-warning">
+                    <i class="ti-settings mx-0"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <h6 class="preview-subject font-weight-normal">Settings</h6>
+                  <p class="font-weight-light small-text mb-0 text-muted">
+                    Private message
+                  </p>
+                </div>
+              </a>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-info">
+                    <i class="ti-user mx-0"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <h6 class="preview-subject font-weight-normal">New user registration</h6>
+                  <p class="font-weight-light small-text mb-0 text-muted">
+                    2 days ago
+                  </p>
+                </div>
+              </a>
+            </div>
+          </li>
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
+              {% if user.collaborator.profilephoto %}
+                <img src="{{ user.collaborator.profile_photo.url }}" alt="profile"/>
+              {% endif %}
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <a class="dropdown-item">
+                <i class="ti-settings"></i>
+                Settings
+              </a>
+              <a href="{% url 'logout' %}" class="dropdown-item">
+                <i class="ti-power-off"></i>
+                Sair
+              </a>
+            </div>
+          </li>
+          <li class="nav-item nav-settings d-none d-lg-flex">
+            <a class="nav-link" href="#">
+              <i class="icon-ellipsis"></i>
+            </a>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="icon-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'list_company' %}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Empresa</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% if user.collaborator.id  %}
+              <a class="nav-link" href="{% url 'collaborator_page' user.collaborator.id  %}">
+                <i class="icon-cog menu-icon"></i>
+                <span class="menu-title">Funcionarios</span>
+              </a>
+            {% else %}
+            <a class="nav-link" href="{% url 'new_collaborator' %}">
+              <i class="icon-cog menu-icon"></i>
+              <span class="menu-title">Cadastrar</span>
+            </a>
+            {% endif %}
+          </li>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'painel_hour' %}">
+            <i class="icon-cog menu-icon"></i>
+            <span class="menu-title">Horas</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'painel_task' %}">
+            <i class="icon-cog menu-icon"></i>
+            <span class="menu-title">Tarefas</span>
+          </a>
+        </li>
+        </ul>
+      </nav>
+   
+{% endblock %}
+
+{% block scripts %}
+
+<script src="https://www.bootstrapdash.com/demo/skydash/template/vendors/js/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script src="https://www.bootstrapdash.com/demo/skydash/template/vendors/chart.js/Chart.min.js"></script>
+<script src="https://www.bootstrapdash.com/demo/skydash/template/vendors/datatables.net/jquery.dataTables.js"></script>
+<script src="https://www.bootstrapdash.com/demo/skydash/template/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+<script src="https://www.bootstrapdash.com/demo/skydash/template/js/dataTables.select.min.js"></script>
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="https://www.bootstrapdash.com/demo/skydash/template/js/off-canvas.js"></script>
+<script src="https://www.bootstrapdash.com/demo/skydash/template/js/hoverable-collapse.js"></script>
+<script src="https://www.bootstrapdash.com/demo/skydash/template/js/template.js"></script>
+<script src="https://www.bootstrapdash.com/demo/skydash/template/js/settings.js"></script>
+<script src="https://www.bootstrapdash.com/demo/skydash/template/js/todolist.js"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="https://www.bootstrapdash.com/demo/skydash/template/js/dashboard.js"></script>
+<script src="https://www.bootstrapdash.com/demo/skydash/template/js/Chart.roundedBarCharts.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="{% static 'js/ajax-functions.js' %}" ></script>
+{% endblock %}
+
+
+<!-- <h3></h3>
+<div class="container-fluid pb-3">
+  <br>
+  <div class="row">
+    {% if  user.company_set.first or user.collaborator.company %}
+      <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
+        <div class="bg-light border rounded-3">
+          {% if user.company_set.first.name %}
+            <h4> Empresa:{{user.company_set.first.name}}</h4>
+          {% elif user.collaborator.company %}
+            <h4> Empresa:{{ user.collaborator.company.name}}</h4>
+          {% endif %}
+          <h5>Configurações</h5> 
+          {% if user.collaborator.company %}
+              <a class="btn btn-primary"href=""><i class="large material-icons">work</i> Empresa</a><br>
+              <br>
+              <a class="btn btn-primary"href="{% url 'home_departament' %}"><i class="large material-icons">web</i> Departamentos</a>
+              <br><br>
+              <a class="btn btn-primary"href="{% url 'collaborator_page' user.collaborator.id %}"><i class="large material-icons">person</i> Funcionario</a>
+              <br><br>
+              <a class="btn btn-primary"href="{% url 'home_documents' %}"><i class="large material-icons">storage</i> Documentos</a>
+              <br><br>
+              <a class="btn btn-primary"href="{% url 'painel_hour' %}"><i class="large material-icons">access_time</i>  Horas</a>
+          {% else %} 
+              <a class="btn btn-primary"href="{% url 'new_collaborator' %}">Cadastrar-se como funcionario</a>
+          {% endif %}
+        </div>
+        <div class="bg-light border rounded-3">
+            <div class="col-md">
+              dashboard
+          </div>
+        </div>
+    {% else %}
+    <br>
+    <div class="alert alert-warning" role="alert">
+      <h5>Atenção para ter acesso Total a plataorma por favor click no link a baixo de cadastro os dados</h5>
+      <a class="btn btn-primary"href="{% url 'create_company' %}">Cadastrar Empresa</a><br>
+    </div>
+    <br>
+    {% endif %}
+  </div>
+</div> -->
