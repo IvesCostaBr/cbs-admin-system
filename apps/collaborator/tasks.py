@@ -1,10 +1,9 @@
-from celery import shared_task
+# from celery import shared_task
 from django.core import mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
 
-@shared_task
 def sendEmailRegister(obj):
     subject = 'Bem Vindo ao HomeWork CBS.:)'
     html_message = render_to_string('email/new_collaborator.html', {'context': obj})
