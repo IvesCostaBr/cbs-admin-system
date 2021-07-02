@@ -102,10 +102,10 @@ def filtertask(request):
         if Task.objects.filter(departament__name_of_departament=value).exists():
             query = Task.objects.filter(departament__name_of_departament=value)
         return render(request, 'task/filter_task.html',{'lista':query})
-    return render(request, 'task/filter_task.html',{'lista':query})
+    return render(request, 'task/filter_task.html')
 
 
-
+'lista':query
 #AJAX FUNCTIONS
 
 def taskComplete(request, id):
