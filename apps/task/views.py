@@ -105,7 +105,6 @@ def filtertask(request):
     return render(request, 'task/filter_task.html')
 
 
-'lista':query
 #AJAX FUNCTIONS
 
 def taskComplete(request, id):
