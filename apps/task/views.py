@@ -99,7 +99,8 @@ class DetailTask(LoginRequiredMixin, DetailView):
 def filtertask(request):
     if request.method == 'POST':
         value = request.POST['pesquisa']
-        query = Task.objects.filter(departament__name_of_departament=value)
+        if Task.objects.filter(departament__name_of_departament=value).exists():
+            query = Task.objects.filter(departament__name_of_departament=value)
         return render(request, 'task/filter_task.html',{'lista':query})
 
 

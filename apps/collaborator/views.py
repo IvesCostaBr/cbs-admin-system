@@ -6,6 +6,7 @@ from django.views.generic.base import View
 from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core import serializers
 from .models import Collaborator
 from .forms import CollaboratorForm
 from django.urls import reverse_lazy, reverse
@@ -108,9 +109,6 @@ class CollaboratorDetail(LoginRequiredMixin, DetailView):
     model = Collaborator
 
 def filtaFuncionario(request):
-    from django.core import serializers
-    from django.http import HttpResponse
-    
     depart = request.GET['other_params']
     departamento= Departament.objects.get(id=depart)
     qs_json = serializers.serialize('json', departamento.collaborato_set.all())
