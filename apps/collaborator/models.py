@@ -7,14 +7,7 @@ from django.db.models import Sum
 
 
 
-class CollaboratorManager(models.Model):
-    def userOnline(self):
-        return self.filter(logged=True)
-
-
 class Collaborator(models.Model):
-
-
     STATUS_LOGGED = [
         (False, 'Offline'),
         (True, 'Online'),
@@ -28,9 +21,6 @@ class Collaborator(models.Model):
     total_horas = models.FloatField(default=00.00)
     profile_photo = models.FileField(upload_to='uploads/%Y/%m/%d/', blank=True, null=True)
     logged = models.BooleanField(default=False,choices=STATUS_LOGGED)
-
-
-    objects = CollaboratorManager()
 
 
     class Meta:

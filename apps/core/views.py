@@ -6,8 +6,11 @@ from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Notification
 from apps.collaborator.models import Collaborator
-
+from django.urls import reverse
+from django.db.models import Count
 from .others.functions_extra import compressed
+from apps.collaborator.models import Collaborator
+from apps.task.models import Task
 
 #--------------------API-----------------------------#
 
@@ -31,6 +34,21 @@ class HomePage(LoginRequiredMixin, TemplateView):
     def get_context_data(self,  *args, **kwargs):
         context = super().get_context_data( *args, **kwargs)
         context['notifications'] = Notification.objects.all().order_by('-id')[:4]
+
+        context['users_logged'] = Collaborator.objects.filter(
+            logged=True, 
+            company=self.request.user.collaborator.company
+            ).aggregate(Count('user'))['user__count']
+
+        context['task_complete'] = Task.objects.filter(
+            company=self.request.user.collaborator.company,
+            status=True
+        ).aggregate(Count('status'))['status__count']
+
+        context['total_collaborators'] = Collaborator.objects.filter(
+            company=self.request.user.collaborator.company
+        ).aggregate(Count('user'))['user__count']
+
         return context
 
 
