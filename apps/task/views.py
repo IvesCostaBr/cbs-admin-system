@@ -22,7 +22,6 @@ from django.utils import timezone
 class PainelTask(LoginRequiredMixin, TemplateView):
     template_name = 'task/painel_task.html'
 
-
 class CreateTask(LoginRequiredMixin, CreateView):
     template_name = 'task/task_form.html'
     form_class = TaskForm
@@ -99,10 +98,26 @@ class DetailTask(LoginRequiredMixin, DetailView):
 def filtertask(request):
     if request.method == 'POST':
         value = request.POST['pesquisa']
-        if Task.objects.filter(departament__name_of_departament=value).exists():
-            query = Task.objects.filter(departament__name_of_departament=value)
-        return render(request, 'task/filter_task.html',{'lista':query})
-    return render(request, 'task/filter_task.html')
+        if Task.objects.filter(
+            departament__name_of_departament=value).exists():
+            if request.user.is_staff:
+                query = Task.objects.filter(
+                    departament__name_of_departament=value)
+            else:
+                query = Task.objects.filter(
+                    departament__name_of_departament=value,
+                    collaborator=request.user.collaborator
+                    )
+            return render(request, 'task/filter_task.html',{'lista':query})
+        return render(request, 'task/filter_task.html')
+        #TODO:Criar outros metodos de pesquisa
+
+
+
+def myTasks(request):
+    myTask = Task.objects.filter(collaborator=request.user.collaborator)
+    return render(request, 'task/task_list.html', {'task_list':myTask})
+    
 
 
 #AJAX FUNCTIONS

@@ -8,6 +8,7 @@ from .views import (
     taskComplete,
     DetailTask,
     filtertask,
+    myTasks,
 )
 
 
@@ -20,5 +21,6 @@ urlpatterns = [
     path('relatorio/', relatorio_pdf, name='relatorio_pdf'),
     path('task-complete/<int:id>/', taskComplete, name='taskComplete'),
     path('task-detail/<int:pk>/', DetailTask.as_view(), name='detail_task'),
-    path('list_my_task/', filtertask, name='list_my_task'),
+    path('filter-task/',filtertask , name='filter-task'),
+    path('list_my_task/', myTasks, name='list_my_task'),
 ]
