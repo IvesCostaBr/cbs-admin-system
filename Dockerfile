@@ -5,9 +5,8 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /code
 
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-RUN pip install django-forms-bootstrap
+COPY requirements-dev.txt .
+RUN pip install -r requirements-dev.txt
 
 COPY . .
 

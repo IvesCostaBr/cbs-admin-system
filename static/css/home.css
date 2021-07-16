@@ -33,12 +33,9 @@
 }
 
 
-.c2{
-    border:solid 1px;
-    border-radius:10px;
-}
 
 #buton {
+    
     display:flex;
     margin: 30px;
     flex-direction: column;

@@ -10,11 +10,4 @@ services:
             - /db.sqlite3
         ports:
             - 8000:8000
-    db:
-        image: postgres
-        volumes:
-            - ./data/db:/var/lib/postgresql/data
-        environment:
-            - POSTGRES_DB=postgres
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
+    

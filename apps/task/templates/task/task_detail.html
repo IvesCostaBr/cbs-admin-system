@@ -10,7 +10,9 @@ Detalhe Tarefa {{ task.id }} | CBS Admin-System
     <br>
 {% endblock %}
 {% block main %}
-<div class="container c2">
+<div class="container" style="
+border:solid 1px;
+border-radius:10px;">
     {% if user.is_staff %}
     <br>
     <a href="{% url 'edit_task' task.id  %}" class="btn-floating btn-large  blue darken-1 waves-light red"><i class="material-icons">border_color</i></a>
